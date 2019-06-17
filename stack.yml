@@ -9,7 +9,10 @@ services:
       - rocket
   rocket-broker:
     image:  foxundermoon/rocketmq-3.2.6
-    command: sh /app/bin/mqbroker -n localhost:9876
+    command:
+      - sh
+      - "-c"
+      - "echo  brokerIP1=$(curl ip.sb 2>/dev/null) >> /app/conf/broker.properties && /app/bin/mqbroker -n localhost:9876"
     networks:
       - rocket
 
